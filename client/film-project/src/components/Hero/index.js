@@ -1,28 +1,31 @@
 import React from "react";
-import greenGuy from "../../assets/images/logo512.png";
+import deadlift_img from "../../assets/images/600_deadlift.jpg";
+
+// lets import the social media icons
+import { InstagramIcon, GitHubIcon, LinkedInIcon, FiverIcon } from "../../components/ui/SocialIcons";
+import SlidingText from "../SlidingText";
 
 const index = () => {
     return (
         <div className='w-full min-h-screen'>
             {/* Hero */}
+
             <div className='flex items-center justify-center h-full gap-40'>
-                <div className='w-[500px]'>
-                    <h1 className='text-3xl font-bold text-center break-words'>Welcome to my fitness application</h1>
-                    <p className='text-center break-words'>In this application we will perform CRUD operations with MongoDB, on top of that we will use Tailwind CSS and React to handle our beautiful UI!</p>
-                    <p className='text-red-500 text-center'>Here are going to be my icons github / my personal website</p>
+                <div className='flex flex-col w-[500px] h-[500px] items-center justify-center'>
+                    <h1 className='text-3xl font-bold text-center break-words align-middle items-center'>Welcome to my fitness application</h1>
+                    <p className="text-l font-normal text-center break-words pt-4 align-middle">Unlock your <span className="text-blue-600 font-bold">FULL</span> potential and start tracking your workouts now!</p>
+                    <div className='flex gap-5'>
+                        <InstagramIcon />
+                        <GitHubIcon />
+                        <LinkedInIcon />
+                        <FiverIcon />
+                    </div>
                 </div>
-                <img src={greenGuy} alt='greenGuy' className='w-1/3' />
+                <img src={deadlift_img} alt='greenGuy' className=' w-[300px] h-[400px] aspect-square object-cover rotate-3 rounded-2xl shadow-lg' />
             </div>
 
             {/* Transition  */}
-            <div className='w-full h-52 bg-slate-50'>
-                <div className='flex items-center justify-between h-full'>
-                    <h1 className='ml-8 text-xl font-bold text-slate-500'>MarketSimp</h1>
-                    <h1 className='text-xl font-bold text-slate-500'>Gymshark</h1>
-                    <h1 className='text-xl font-bold text-slate-500'>YoungLA</h1>
-                    <h1 className='mr-8 text-xl font-bold text-slate-500'>RandomGym</h1>
-                </div>
-            </div>
+            <SlidingText/>
 
             {/* Features */}
             <div className='flex items-center justify-center h-full gap-40'>
