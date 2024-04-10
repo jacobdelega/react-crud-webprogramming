@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { animated } from "react-spring";
 
-const index = () => {
+const Workouts = () => {
+    const [workouts, setWorkouts] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:3000/api/workouts")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Fetched Data:", data); // Log the fetched data
+                setWorkouts(data);
+            })
+            .catch((error) => console.error("Error fetching workouts:", error)); // Log errors
+    }, []);
+
+    console.log(workouts);
+
     return (
         <div className='pt-16 flex justify-center'>
             <div className='bg-slate-50 h-[500px] w-2/3 border shadow-lg rounded-lg'>
                 {/* <div className='sm:flex-col flex gap-32'>
 
-                  <div className='mt-16 ml-16 w-1/2 justify-center align-middle text-center'>
+                <div className='mt-16 ml-16 w-1/2 justify-center align-middle text-center'>
                     <h1 className='text-2xl font-bold p-4'>Description</h1>
                     <p className='text-l text-justify'>With this application you can track all your workouts, and see if all the work you are putting in is actually working! This can open your mind to possible imperfections you can work on to maximize total growth.</p>
                   </div>
@@ -52,10 +66,12 @@ const index = () => {
                             </form>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
     );
 };
 
-export default index;
+export default Workouts;
