@@ -14,7 +14,7 @@ const SlidingText = ({ text }) => {
 
     return (
         <div key={key}>
-            <animated.div style={scrolling} classname='w-full h-52 bg-slate-50'>
+            <animated.div style={scrolling} className='w-full h-52 '>
                 <div className='flex items-center justify-between h-full'>
                     <h1 className='ml-8 text-xl font-bold text-slate-500'>MarketSimp</h1>
                     <h1 className='text-xl font-bold text-slate-500'>Gymshark</h1>
