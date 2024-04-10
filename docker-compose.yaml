@@ -1,0 +1,18 @@
+version: "1"
+services:
+    react:
+        container_name: react-container
+        build: ./client/film-project
+        image: react-image
+        restart: always
+        ports:
+            - "3001:3000"
+        environment:
+            EXPRESS_URL: "http://express:3000"
+    express:
+        container_name: express-container
+        build: ./server
+        image: express-image
+        restart: always
+        ports:
+            - "3000:3000"

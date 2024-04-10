@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import deadlift_img from "../../assets/images/600_deadlift.jpg";
 
 // lets import the social media icons
