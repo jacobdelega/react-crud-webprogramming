@@ -7,6 +7,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Workout = require("./models/workout");
 const WorkoutLog = require("./models/workoutLog");
+const User = require("./models/user");
+const Contact = require("./models/contact");
 
 // ========= Connect to MongoDB =========
 const uri = "mongodb+srv://jacobdelega:admin@cluster0.34jadgf.mongodb.net/fitness-crud?retryWrites=true&w=majority&appName=cluster0";
@@ -109,7 +111,7 @@ app.post("/api/add-workout", async (req, res) => {
 
         await newWorkout.save();
         res.send(newWorkout);
-        console.log("New workout added:", newWorkout)
+        console.log("New workout added:", newWorkout);
     } catch (err) {
         console.error("Error adding workout:", err.message);
         res.status(500).json({ error: "Error adding workout" });
@@ -190,6 +192,113 @@ app.get("/workouts", (req, res) => {
         res.status(500).json({ error: "Error fetching workouts" });
     }
 });
+
+// ========= User Authentication =========
+// Register a new user by post
+app.post("/api/register", async (req, res) => {
+    try {
+        // Grab information from client side
+        const { email, password, name } = req.body; // Access form data with req.body
+        if (!email || !password || !name) {
+            return res.status(400).json({ error: "Please fill in all registration details" });
+        }
+        // Build the user based
+        const newUser = new User({
+            email: req.body.email,
+            password: req.body.password,
+            name: req.body.name,
+        });
+
+        await newUser.save();
+        res.status(204).send(newUser);
+        console.log("New user added:", newUser);
+    } catch (err) {
+        console.error("Error adding user:", err.message);
+        res.status(500).json({ error: "Error adding user" });
+    }
+});
+
+const jwt = require("jsonwebtoken");
+
+// Register a user
+app.post("/api/register", async (req, res) => {
+    try {
+        // get user information via req body
+        const { email, password, name } = req.body;
+
+        // push user information to the database
+        const newUser = new User({
+            email: email,
+            password: password,
+            name: name,
+        });
+
+        await newUser.save();
+
+        res.status(202).json({ message: "User registered successfully" });
+        console.log("New user added:", newUser);
+    } catch (err) {
+        console.error("Error adding user:", err.message);
+        res.status(500).json({ error: "Error adding user" });
+    }
+});
+
+// Login a user
+app.post("/api/login", async (req, res) => {
+    try {
+        // get user information via req body
+        const { email, password } = req.body;
+
+        // error handling
+        if (!email || !password) {
+            return res.status(400).json({ error: "Missing login details" });
+        }
+
+        const user = await User.findOne({ email: email, password: password });
+
+        if (!user) {
+            return res.status(400).json({ error: "User not found" });
+        } else {
+            // Login success
+            // Create a token
+            const expiresIn = "1h";
+            const token = jwt.sign({ userId: user._id }, "MY_SECRET_KEY", { expiresIn });
+
+            res.json({ message: "Login successful", token: token });
+            console.log("User logged in:", user);
+        }
+    } catch (err) {
+        console.error("Error logging in user:", err.message);
+        res.status(500).json({ error: "Error logging in user" });
+    }
+});
+
+// ========= end of User Authentication =========
+
+// ========= Contact Form =========
+// Add a new contact form
+app.post("/api/contact", async (req, res) => {
+    try {
+        const { name, email, message } = req.body; // Access form data with req.body
+        if (!name || !email || !message) {
+            return res.status(400).json({ error: "Please fill in all contact details" });
+        }
+
+        const newContact = new Contact({
+            name: name,
+            email: email,
+            message: message,
+        });
+
+        await newContact.save();
+        res.send(newContact);
+        console.log("New contact added:", newContact);
+    } catch (err) {
+        console.error("Error adding contact:", err.message);
+        res.status(500).json({ error: "Error adding contact" });
+    }
+});
+
 
 // Start the server
 
