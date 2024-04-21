@@ -25,7 +25,9 @@ const Contact = () => {
                 console.error("Error:", error);
             });
     };
+    // TODO: Add in sessionStorage to store form data
 
+    
     return (
         <>
             <div>

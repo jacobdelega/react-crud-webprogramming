@@ -1,31 +1,23 @@
 import React from "react";
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormHelperText from '@mui/material/FormHelperText';
 
 const Playground = () => {
-    document.cookie = "test1=Hello; SameSite=None; Secure";
-    document.cookie = "test2=World; SameSite=None; Secure";
-
-    const cookieValue = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("test2="))
-        ?.split("=")[1];
-
-    function showCookieValue() {
-        const output = document.getElementById("cookie-value");
-        output.textContent = `> ${cookieValue}`;
-    }
-
-    function clearOutputCookieValue() {
-        const output = document.getElementById("cookie-value");
-        output.textContent = "";
-    }
-
     return (
         <div className=''>
-            <button className='block border' onClick={showCookieValue}>
-                Show Cookies
-            </button>
-            <button onClick={clearOutputCookieValue}>Clear Cookies</button>
-            <div id='cookie-value'></div>
+            <FormControl sx={{ m: 1, width: "25ch" }} variant='outlined'>
+                <OutlinedInput
+                    id='outlined-adornment-weight'
+                    endAdornment={<InputAdornment position='end'>kg</InputAdornment>}
+                    aria-describedby='outlined-weight-helper-text'
+                    inputProps={{
+                        "aria-label": "weight",
+                    }}
+                />
+                <FormHelperText id='outlined-weight-helper-text'>Weight</FormHelperText>
+            </FormControl>
         </div>
     );
 };
