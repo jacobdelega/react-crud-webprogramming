@@ -19,7 +19,6 @@ export default function WorkoutEdit({ workout }) {
     };
 
     const handleEditSubmit = async (formJson) => {
-
         try {
             const response = await fetch(`http://localhost:3000/api/update-workout/${workout._id}`, {
                 method: "PUT",

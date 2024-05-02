@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
-
     // Define navigator
     const navigate = useNavigate();
 
@@ -14,7 +13,6 @@ const Register = () => {
 
     // Define error message
     const [error, setError] = useState("");
-
 
     // Function to handle the form submission
     const handleFormSubmit = async (e) => {
@@ -30,23 +28,22 @@ const Register = () => {
         // Send the data to the server
 
         const response = await fetch("http://localhost:3000/api/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ name, email, password }),
-            });
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, email, password }),
+        });
+        console.log(response);
+        const data = response.json();
 
-            const data = await response.json();
-
-            // on success redirect to login page
-            // check the status code returned 
-            if (response.status === 202) {
-                navigate("/login");
-            } else {
-                setError("Error registering user");
-            }
-
+        // on success redirect to login page
+        // check the status code returned
+        if (response.status === 202) {
+            navigate("/login");
+        } else {
+            setError("Error registering user");
+        }
     };
 
     return (

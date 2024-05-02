@@ -60,25 +60,25 @@ const Workouts = () => {
 
     return (
         <>
-            <div className='pt-16 flex justify-center max-h-screen'>
-                <div className='bg-slate-50 w-2/3 border shadow-lg rounded-lg'>
-                    <div className='flex' name='form__container'>
-                        <div name='left__container' className='w-1/2 h-full'>
+            <div className='pt-16 flex justify-center'>
+                <div className='bg-slate-50 w-5/6 border shadow-lg rounded-lg'>
+                    <div className='flex md:flex-row flex-col' name='form__container'>
+                        <div name='left__container' className='h-full'>
                             <h1 name='left_header' className='text-center text-2xl font-bold p-4 w-full'>
                                 Description
                             </h1>
-                            <div name='left__content' className='w-full flex justify-center align-middle text-center border-b'>
-                                <p className='text-l text-center w-5/6 '>
+                            <div name='left__content' className='w-full flex justify-center align-middle text-center'>
+                                <p className='text-l text-center w-5/6 mb-3 border-b decoration'>
                                     Essentially this application allows you to keep track of each individual workout. You can add a new workout, edit an existing workout, and delete a workout. End goals are to be able to track your progress and see
                                     how you are improving over time.
                                 </p>
                             </div>
 
-                            <div>
+                            <div className="flex flex-col">
                                 {/* Lets list out each workouts */}
                                 <h1 className='text-xl font-bold text-center pb-8 pt-4'> All workouts</h1>
                                 {workouts.map((workout) => (
-                                    <div className='flex pt-4 gap-2 items-center pb-1' key={workout.id}>
+                                    <div className='flex pt-4 gap-2 items-center pb-1 justify-start pl-4' key={workout.id}>
                                         <h2 className='pl-4'>{workout.name}</h2>
                                         <p className='ml-4'>Sets: {workout.sets}</p>
                                         <p>Reps: {workout.reps}</p>
@@ -95,7 +95,7 @@ const Workouts = () => {
                             </div>
                         </div>
 
-                        <div name='right__container' className='w-1/2 h-full'>
+                        <div name='right__container' className='mr-8 h-full w-1/2'>
                             <h1 name='right_header' className='text-center text-2xl font-bold p-4 w-full'>
                                 Form Entry
                             </h1>

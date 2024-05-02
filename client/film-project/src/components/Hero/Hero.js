@@ -1,5 +1,5 @@
 import React from "react";
-import deadlift_img from "../../assets/images/600_deadlift.jpg";
+import deadlift_img from "../../assets/images/600_deadlift.png";
 
 // lets import the social media icons
 import { InstagramIcon, GitHubIcon, LinkedInIcon, FiverIcon } from "../ui/SocialIcons";

@@ -13,7 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function SlideInAlert({ workout, workouts }) {
     const [open, setOpen] = React.useState(false);
-
+    
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -23,6 +23,8 @@ export default function SlideInAlert({ workout, workouts }) {
     };
 
     const handleDelete = (e) => {
+
+        e.preventDefault();
         try {
             const response = fetch(`http://localhost:3000/api/delete-workout/${workout._id}`, {
                 method: "DELETE",
@@ -30,6 +32,8 @@ export default function SlideInAlert({ workout, workouts }) {
                     "Content-Type": "application/json",
                 },
             });
+
+            
 
             handleClose(); // close it 
         } catch (err) {

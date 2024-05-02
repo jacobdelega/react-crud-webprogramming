@@ -5,6 +5,8 @@ const Contact = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [response, setResponse] = useState("");
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,6 +22,7 @@ const Contact = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
+                setResponse("Thank you for reaching out: " + data.email);
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -61,6 +64,7 @@ const Contact = () => {
                                 <button className='p-2 mt-2 text-white bg-slate-300'>
                                     Submit
                                 </button>
+                                {response && <p className='text-center text-slate-500'>{response}</p>}
                             </form>
                         </div>
                     </div>

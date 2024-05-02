@@ -9,21 +9,19 @@ export default function Home() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
-
     const handleLogout = async () => {
-      try {
-        // Remove token from localStorage
-        localStorage.removeItem("token");
-        // Set isLoggedIn to false for conditional rendering
-        setIsLoggedIn(false);
-        // Optionally redirect to login page
-        navigate("/login");
-      } catch (err) {
-        console.error("Error logging out:", err.message);
-        // Handle logout error (optional)
-      }
+        try {
+            // Remove token from localStorage
+            localStorage.removeItem("token");
+            // Set isLoggedIn to false for conditional rendering
+            setIsLoggedIn(false);
+            // Optionally redirect to login page
+            navigate("/login");
+        } catch (err) {
+            console.error("Error logging out:", err.message);
+            // Handle logout error (optional)
+        }
     };
-
 
     useEffect(() => {
         const token = localStorage.getItem("token");
